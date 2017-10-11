@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<head>
+</head>
+<body>
+  <form>
+    <div>
+      <label>Enter the name of the new video</label>
+      <input autofocus />
+    </div>
+    <button type="submit">Add</button>
+
+  </form>
+  <script>
+  const electron = require('electron');
+  const {ipcRenderer} = electron;
+
+    document.querySelector('form').addEventListener('submit',(event)=>{
+      event.preventDefault();
+      const { value } = document.querySelector('input');
+      ipcRenderer.send('new:video',value);
+    });
+  </script>
+</body>

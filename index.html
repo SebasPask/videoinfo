@@ -20,12 +20,15 @@
         <br>
         <button class="btn btn-success" type="submit" name="button">Get Length</button>
       </div>
+      <ul>
+      </ul>
     </form>
     <br>
     <h4 class="text-center" id="result"></h4>
     <script type="text/javascript">
     const electron = require('electron');
     const {ipcRenderer} = electron;
+    const list =   document.querySelector('ul');
 
       document.querySelector('form').addEventListener('submit',(event)=>{
         event.preventDefault();
@@ -35,6 +38,15 @@
 
       ipcRenderer.on('video:metadata',(event, duration) =>{
         document.querySelector('#result').innerHTML = `Video is ${duration} seconds`;
+      });
+      ipcRenderer.on('new:video',(event, video) => {
+        const li = document.createElement('li');
+        const text = document.createTextNode(video);
+        li.appendChild(text);
+        list.appendChild(li);
+      });
+      ipcRenderer.on('clear:videos',() => {
+        list.innerHTML = '';
       });
     </script>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
