@@ -7,7 +7,10 @@ let addWindow;
 
 
 app.on('ready',() => {
-  mainWindow = new BrowserWindow({});
+  mainWindow = new BrowserWindow({
+    width:430,
+    height:490
+  });
   mainWindow.loadURL(`file://${__dirname}/index.html`);
   mainWindow.on('closed',()=>app.quit());
   const mainMenu = Menu.buildFromTemplate(menuTemplate);
@@ -20,7 +23,7 @@ ipcMain.on('video:submit',(event,path)=>{
 });
 function createAddWindow(){
   addWindow = new BrowserWindow({
-    width:300,
+    width:200,
     height:200,
     title:'Add New Video'
   });
